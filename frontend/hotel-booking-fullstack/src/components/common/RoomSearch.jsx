@@ -73,6 +73,12 @@ const RoomSearch = () => {
   return (
     <>
       <Container className="mt-5 mb-5 py-5 shadow">
+        <div
+          className="text-center mb-5"
+          style={{ color: "rgb(169, 77, 123)" }}
+        >
+          <h2>Search Available Rooms</h2>
+        </div>
         <Form onSubmit={handleSearch}>
           <Row className="justify-content-center">
             <Col xs={12} md={3}>
@@ -104,13 +110,13 @@ const RoomSearch = () => {
             <Col xs={12} md={3}>
               <Form.Group controlId="checkOutDate">
                 <Form.Label>Room Type</Form.Label>
-                <div className="d-flex">
+                <div className="d-flex justify-content-between">
                   <RoomTypeSelector
                     handleRoomTypeInputChange={handleInputChange}
                     newRoom={searchQuery}
                   />
 
-                  <Button variant="secondary" type="submit">
+                  <Button variant="warning" type="submit">
                     Search
                   </Button>
                 </div>

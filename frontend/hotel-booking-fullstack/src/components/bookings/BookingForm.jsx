@@ -91,7 +91,8 @@ const BookingForm = () => {
       setIsSubmitted(true);
       navigate("/booking-success", { state: { message: confirmationCode } });
     } catch (error) {
-      setErrorMessage(error.message);
+      const errorMessage = error.message;
+      console.log(errorMessage);
       navigate("/booking-success", { state: { error: errorMessage } });
     }
   };
@@ -223,7 +224,7 @@ const BookingForm = () => {
                   </div>
                 </fieldset>
 
-                <div className="form-group mt-2 mb-2">
+                <div className="form-group mt-3 d-flex justify-content-end">
                   <button className="btn btn-hotel" type="submit">
                     Continue
                   </button>

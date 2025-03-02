@@ -35,6 +35,7 @@ const RoomTypeSelector = ({ handleRoomTypeInputChange, newRoom }) => {
           if (e.target.value === "Add new type") {
             setShowNewTypeInput(true);
           } else {
+            setShowNewTypeInput(false);
             handleRoomTypeInputChange(e);
           }
         }}

@@ -4,6 +4,7 @@ import {
   getBookingByConfirmationCode,
 } from "../utils/ApiFunction";
 import moment from "moment";
+import { FaCopy } from "react-icons/fa";
 
 const FindBooking = () => {
   const [confirmationCode, setConfirmationCode] = useState("");
@@ -106,30 +107,165 @@ const FindBooking = () => {
           <div className="text-danger">Error: {error}</div>
         ) : bookingInfo.bookingConfirmationCode ? (
           <div className="col-md-6 mt-4 mb-5">
-            <h3>Booking Information</h3>
-            <p>
-              Booking Confirmation Code: {bookingInfo.bookingConfirmationCode}
-            </p>
-            <p>Booking ID: {bookingInfo.bookingId}</p>
-            <p>Room Number: {bookingInfo.room.id}</p>
-            <p>Room Type: {bookingInfo.room.type}</p>
-            <p>
-              Check-in Date:{" "}
-              {moment(bookingInfo.checkInDate)
-                .subtract(1, "month")
-                .format("MMM Do, YYYY")}
-            </p>
-            <p>
-              Check-out Date:{" "}
-              {moment(bookingInfo.checkOutDate)
-                .subtract(1, "month")
-                .format("MMM Do, YYYY")}
-            </p>
-            <p>Full Name: {bookingInfo.guestFullName}</p>
-            <p>Email: {bookingInfo.guestEmail}</p>
-            <p>Number of Adults: {bookingInfo.numOfAdults}</p>
-            <p>Number of Children: {bookingInfo.numOfChildren}</p>
-            <p>Total Number of Guests: {bookingInfo.totalNumOfGuests}</p>
+            <h3 className="mb-3 text-center">Booking Information</h3>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Booking Confirmation Code
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.bookingConfirmationCode}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Booking ID
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.bookingId}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Room Number
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.room.id}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Room Type
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.room.type}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Check-in Date
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={moment(bookingInfo.checkInDate)
+                  .subtract(1, "month")
+                  .format("MMM Do, YYYY")}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Check-out Date
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={moment(bookingInfo.checkOutDate)
+                  .subtract(1, "month")
+                  .format("MMM Do, YYYY")}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Full Name
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.guestFullName}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Email
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.guestEmail}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Number of Adults
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.numOfAdults}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Number of children
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.numOfChildren}
+              />
+            </div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">
+                Total Number of Guests
+              </span>
+              <input
+                disabled
+                type="text"
+                className="form-control"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={bookingInfo.totalNumOfGuests}
+              />
+            </div>
 
             {!isDeleted && (
               <button
@@ -141,7 +277,9 @@ const FindBooking = () => {
             )}
           </div>
         ) : (
-          <div>Find Booking...</div>
+          <div>
+            Enter your booking confirmation code to find your booking !!!
+          </div>
         )}
 
         {isDeleted && (

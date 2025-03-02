@@ -33,9 +33,11 @@ const RoomCarousel = () => {
 
   return (
     <section className="bg-light mb-5 mt-5 shadow">
-      <Link to={"/browse-all-rooms"} className="hotel-color text-center">
-        Browse all rooms
-      </Link>
+      <div className="text-center mb-3">
+        <Link to={"/browse-all-rooms"} className="btn btn-hotel">
+          Browse all rooms
+        </Link>
+      </div>
 
       <Container>
         <Carousel indicators={false}>
@@ -60,10 +62,10 @@ const RoomCarousel = () => {
                           {room.type}
                         </Card.Title>
                         <Card.Title className="hotel-color">
-                          {room.price} / night
+                          {room.price}$/night
                         </Card.Title>
 
-                        <div className="flex-shrink-0">
+                        <div className="d-flex justify-content-end">
                           <Link
                             to={`/book-room/${room.id}`}
                             className="btn btn-sm btn-hotel"

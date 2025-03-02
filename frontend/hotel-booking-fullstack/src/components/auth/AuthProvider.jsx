@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext({
@@ -7,7 +7,11 @@ export const AuthContext = createContext({
   handleLogout: () => {},
 });
 
-const AuthProvider = ({ children }) => {
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const handleLogin = (token) => {

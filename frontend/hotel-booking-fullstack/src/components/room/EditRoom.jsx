@@ -67,7 +67,7 @@ const EditRoom = () => {
     <section className="container mt-5 mb-5">
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
-          <h2 className="mt-5 mb-2">Update room</h2>
+          <h2 className="mt-5 mb-5 text-center">Update room</h2>
           {successMessage && (
             <div className="alert alert-success fade show">
               {successMessage}
@@ -118,29 +118,29 @@ const EditRoom = () => {
                 onChange={handleImageChange}
               />
               {imagePreview && (
-                <img
-                  src={`data:image/png;base64, ${imagePreview}`}
-                  alt="Preview Room Photo"
-                  style={{ maxWidth: "400px", maxHeight: "400px" }}
-                  className="mt-3"
-                />
+                <div className="mt-3 text-center">
+                  <img
+                    src={`data:image/png;base64, ${imagePreview}`}
+                    alt="Preview Room Photo"
+                    style={{
+                      maxWidth: "400px",
+                      maxHeight: "400px",
+                      borderRadius: "10px",
+                    }}
+                  />
+                </div>
               )}
             </div>
 
-            <div className="d-flex gap-2">
+            <div className="d-flex gap-2 justify-content-center">
               <div className="mt-2">
-                <Link
-                  className="btn btn-outline-info ml-5"
-                  to={"/existing-rooms"}
-                >
+                <Link className="btn btn-info" to={"/existing-rooms"}>
                   Back
                 </Link>
               </div>
 
               <div className="mt-2">
-                <button className="btn btn-outline-warning ml-5">
-                  Update Room
-                </button>
+                <button className="btn btn-warning">Update Room</button>
               </div>
             </div>
           </form>

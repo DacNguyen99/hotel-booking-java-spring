@@ -6,20 +6,18 @@ import { AuthContext } from "../auth/AuthProvider";
 const NavBar = () => {
   const [showAccount, setShowAccount] = useState(false);
 
-  const { user } = useContext(AuthContext);
-
   const handleAccountToggle = () => {
     setShowAccount(!showAccount);
   };
 
-  const isLoggedIn = user !== null;
+  const isLoggedIn = localStorage.getItem("token");
   const userRole = localStorage.getItem("userRole");
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary px-5 shadow mt-5 sticky-top">
       <div className="container-fluid">
         <Link to={"/"} className="navbar-brand">
-          <span className="hotel-color">DacNguyen Hotel</span>
+          <span className="hotel-color">Hotel Del Luna</span>
         </Link>
         <button
           className="navbar-toggler"

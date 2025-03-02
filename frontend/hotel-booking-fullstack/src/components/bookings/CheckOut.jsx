@@ -52,7 +52,11 @@ const CheckOut = () => {
                 <img
                   src={`data:image/png;base64, ${roomInfo.photo}`}
                   alt="Room Photo"
-                  style={{ width: "100%", height: "200px" }}
+                  style={{
+                    width: "100%",
+                    height: "200px",
+                    borderRadius: "5px",
+                  }}
                 />
 
                 <table className="table table-bordered">
@@ -63,7 +67,7 @@ const CheckOut = () => {
                     </tr>
                     <tr>
                       <th>Room Price: </th>
-                      <th>{roomInfo.price}</th>
+                      <th>{roomInfo.price}$/night</th>
                     </tr>
                     <tr>
                       <th>Room Service: </th>

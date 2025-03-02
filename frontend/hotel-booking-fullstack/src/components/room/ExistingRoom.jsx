@@ -89,7 +89,10 @@ const ExistingRoom = () => {
 
             <div className="mb-3 mb-md-0">
               <Link to={"/add-room"} className="btn btn-primary">
-                <FaPlus /> Add new room
+                <span style={{ marginRight: "5px" }}>
+                  <FaPlus />
+                </span>
+                Add new room
               </Link>
             </div>
           </div>
@@ -109,12 +112,18 @@ const ExistingRoom = () => {
                   <td>{room.id}</td>
                   <td>{room.type}</td>
                   <td>{room.price}</td>
-                  <td className="gap-2">
+                  <td>
                     <Link to={`/edit-room/${room.id}`}>
-                      <span className="btn btn-info btn-sm">
+                      <span
+                        className="btn btn-info btn-sm"
+                        style={{ marginRight: "5px" }}
+                      >
                         <FaEye />
                       </span>
-                      <span className="btn btn-warning btn-sm">
+                      <span
+                        className="btn btn-warning btn-sm"
+                        style={{ marginRight: "5px" }}
+                      >
                         <FaEdit />
                       </span>
                     </Link>

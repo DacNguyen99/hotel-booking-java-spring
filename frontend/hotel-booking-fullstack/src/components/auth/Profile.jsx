@@ -88,16 +88,16 @@ const Profile = () => {
           className="card p-5 mt-5"
           style={{ backgroundColor: "whitesmoke" }}
         >
-          <h4 className="card-title text-center">User Information</h4>
+          <h3 className="card-title text-center">User Information</h3>
           <div className="card-body">
             <div className="col-md-10 mx-auto">
-              <div className="card mb-3 shadow">
+              <div className="card mb-5 shadow">
                 <div className="row g-0">
-                  <div className="col-md-2">
-                    <div className="d-flex justify-content-center align-items-center mb-4">
+                  <div className="col-md-3 d-flex justify-content-center align-items-center">
+                    <div>
                       <img
-                        src="https://themindfulaimanifesto.org/wp-content/uploads/2020/09/male-placeholder-image.jpeg"
                         alt="Profile"
+                        src="https://img.icons8.com/?size=100&id=JZ63JkSBTYMx&format=png&color=000000"
                         className="rounded-circle"
                         style={{
                           width: "150px",
@@ -108,7 +108,7 @@ const Profile = () => {
                     </div>
                   </div>
 
-                  <div className="col-md-10">
+                  <div className="col-md-9">
                     <div className="card-body">
                       <div className="form-group row">
                         <label className="col-md-2 col-form-label fw-bold">
@@ -169,7 +169,7 @@ const Profile = () => {
                 </div>
               </div>
 
-              <h4 className="card-title text-center">Booking History</h4>
+              <h3 className="card-title text-center mb-3">Booking History</h3>
 
               {bookings.length > 0 ? (
                 <table className="table table-bordered table-hover shadow">
@@ -187,8 +187,8 @@ const Profile = () => {
                   <tbody>
                     {bookings.map((booking, index) => (
                       <tr key={index}>
-                        <td>{booking.bookingId}</td>
-                        <td>{booking.room.id}</td>
+                        <td className="text-center">{booking.bookingId}</td>
+                        <td className="text-center">{booking.room.id}</td>
                         <td>{booking.room.type}</td>
                         <td>
                           {moment(booking.checkInDate)
@@ -210,10 +210,10 @@ const Profile = () => {
                 <p>You have not made any bookings yet.</p>
               )}
 
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center mt-4">
                 <div className="mx-2">
                   <button
-                    className="btn btn-danger btn-sm"
+                    className="btn btn-danger"
                     onClick={handleDeleteAccount}
                   >
                     Close account
