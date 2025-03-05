@@ -27,7 +27,7 @@ const Login = () => {
       const token = success.jwt;
       auth.handleLogin(token);
       navigate(redirectUrl, { replace: true });
-      // window.location.reload();
+      window.location.reload();
     } else {
       setErrorMessage("Invalid email or password. Please try again.");
     }

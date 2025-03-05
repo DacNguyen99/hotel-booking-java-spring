@@ -33,11 +33,39 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/edit-room/:roomId" element={<EditRoom />} />
-            <Route path="/existing-rooms" element={<ExistingRoom />} />
-            <Route path="/add-room" element={<AddRoom />} />
+            <Route
+              path="/edit-room/:roomId"
+              element={
+                <RequireAuth>
+                  <EditRoom />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/existing-rooms"
+              element={
+                <RequireAuth>
+                  <ExistingRoom />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/add-room"
+              element={
+                <RequireAuth>
+                  <AddRoom />
+                </RequireAuth>
+              }
+            />
             <Route path="/browse-all-rooms" element={<RoomListing />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route
+              path="/admin"
+              element={
+                <RequireAuth>
+                  <Admin />
+                </RequireAuth>
+              }
+            />
             <Route
               path="/book-room/:roomId"
               element={

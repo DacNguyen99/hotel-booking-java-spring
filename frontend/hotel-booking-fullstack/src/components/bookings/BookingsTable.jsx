@@ -1,6 +1,7 @@
 import { parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
 import DateSlider from "../common/DateSlider";
+import moment from "moment";
 
 const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
   const [filteredBookings, setFilteredBookings] = useState(bookingInfo);
@@ -58,8 +59,8 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
               <td>{booking.bookingId}</td>
               <td>{booking.room.id}</td>
               <td>{booking.room.type}</td>
-              <td>{booking.checkInDate}</td>
-              <td>{booking.checkOutDate}</td>
+              <td>{moment(booking.checkInDate).format("DD/MM/YYYY")}</td>
+              <td>{moment(booking.checkOutDate).format("DD/MM/YYYY")}</td>
               <td>{booking.guestFullName}</td>
               <td>{booking.guestEmail}</td>
               <td>{booking.numOfAdults}</td>
