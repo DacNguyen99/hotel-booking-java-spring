@@ -31,24 +31,25 @@ public class Room {
     private Blob photo;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<BookedRoom> bookedRooms;
+    private List<Booking> bookings;
 
     // create a new list of bookings when create a new instance to avoid null pointer
     public Room() {
-        this.bookedRooms = new ArrayList<>();
+        this.bookings = new ArrayList<>();
     }
 
-    // create a convenient method to handle new booking
-    public void addBooking(BookedRoom booking) {
-        if (this.bookedRooms == null) {
-            this.bookedRooms = new ArrayList<>();
+    // create a convenient method to handle a new booking
+    public void addBooking(Booking booking) {
+        if (this.bookings == null) {
+            this.bookings = new ArrayList<>();
         }
 
-        this.bookedRooms.add(booking);
+        this.bookings.add(booking);
         booking.setRoom(this);
         this.available = false;
-        String bookingCode = UUID.randomUUID().toString();
-        booking.setBookingConfirmationCode(bookingCode);
+
+        // create booking confirmation code using UUID and set it
+        booking.setBookingConfirmationCode(UUID.randomUUID().toString());
     }
 
     @Override

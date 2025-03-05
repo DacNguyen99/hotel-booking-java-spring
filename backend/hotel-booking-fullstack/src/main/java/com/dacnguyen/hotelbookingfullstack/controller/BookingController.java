@@ -2,7 +2,7 @@ package com.dacnguyen.hotelbookingfullstack.controller;
 
 import com.dacnguyen.hotelbookingfullstack.dto.response.BookingResponse;
 import com.dacnguyen.hotelbookingfullstack.dto.response.RoomResponse;
-import com.dacnguyen.hotelbookingfullstack.entity.BookedRoom;
+import com.dacnguyen.hotelbookingfullstack.entity.Booking;
 import com.dacnguyen.hotelbookingfullstack.entity.Room;
 import com.dacnguyen.hotelbookingfullstack.exception.InvalidBookingRequestException;
 import com.dacnguyen.hotelbookingfullstack.exception.ResourceNotFoundException;
@@ -28,9 +28,9 @@ public class BookingController {
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<BookingResponse>> getAllBookings() {
-        List<BookedRoom> bookings = bookingService.getAllBookings();
+        List<Booking> bookings = bookingService.getAllBookings();
         List<BookingResponse> bookingResponses = new ArrayList<>();
-        for (BookedRoom booking : bookings) {
+        for (Booking booking : bookings) {
             BookingResponse bookingResponse = toBookingResponse(booking);
             bookingResponses.add(bookingResponse);
         }
@@ -40,7 +40,7 @@ public class BookingController {
     @GetMapping("/confirmation/{confirmationCode}")
     public ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationCode) {
         try {
-            BookedRoom booking = bookingService.findByConfirmationCode(confirmationCode);
+            Booking booking = bookingService.findByConfirmationCode(confirmationCode);
             BookingResponse bookingResponse = toBookingResponse(booking);
             return ResponseEntity.ok(bookingResponse);
         } catch (ResourceNotFoundException e) {
@@ -49,7 +49,7 @@ public class BookingController {
     }
 
     @PostMapping("/book/{id}")
-    public ResponseEntity<?> saveBooking(@PathVariable long id, @RequestBody BookedRoom bookingRequest) {
+    public ResponseEntity<?> saveBooking(@PathVariable long id, @RequestBody Booking bookingRequest) {
         try {
             String confirmationCode = bookingService.saveBooking(id, bookingRequest);
             return ResponseEntity.ok(
@@ -66,19 +66,21 @@ public class BookingController {
 
     @GetMapping("/{email}")
     public ResponseEntity<List<BookingResponse>> getBookingsByUserEmail(@PathVariable String email) {
-        List<BookedRoom> bookings = bookingService.getBookingsByUserEmail(email);
+        List<Booking> bookings = bookingService.getBookingsByUserEmail(email);
         List<BookingResponse> bookingResponses = new ArrayList<>();
-        for (BookedRoom booking : bookings) {
+        for (Booking booking : bookings) {
             BookingResponse bookingResponse = toBookingResponse(booking);
             bookingResponses.add(bookingResponse);
         }
         return ResponseEntity.ok(bookingResponses);
     }
 
-    // mapper
-    private BookingResponse toBookingResponse(BookedRoom booking) {
+    // mapper - Booking to BookingResponse
+    private BookingResponse toBookingResponse(Booking booking) {
+        // get the relevant room to have the room response
         Room room = roomService.getRoomById(booking.getRoom().getId()).get();
         RoomResponse roomResponse = new RoomResponse(room.getId(), room.getType(), room.getPrice());
+
         return new BookingResponse(
                 booking.getBookingId(),
                 booking.getCheckInDate(),

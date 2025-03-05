@@ -30,9 +30,14 @@ public class RoomService implements RoomServiceInterface {
         Room room = new Room();
         room.setPrice(price);
         room.setType(type);
+        // check if there is a room photo
         if (!photo.isEmpty()) {
+            // convert from MultipartFile data type to bytes
             byte[] photoBytes = photo.getBytes();
+
+            // convert from bytes to BLOB data type
             Blob photoBlob = new SerialBlob(photoBytes);
+
             room.setPhoto(photoBlob);
         }
 
@@ -41,6 +46,7 @@ public class RoomService implements RoomServiceInterface {
 
     @Override
     public List<String> getAllRoomTypes() {
+        // using distinct in case of repeat
         return roomRepository.findDistinctRoomTypes();
     }
 
@@ -57,6 +63,7 @@ public class RoomService implements RoomServiceInterface {
         }
         Blob photoBlob = roomOptional.get().getPhoto();
         if (photoBlob != null) {
+            // convert from BLOB to bytes
             return photoBlob.getBytes(1, (int) photoBlob.length());
         }
         return null;

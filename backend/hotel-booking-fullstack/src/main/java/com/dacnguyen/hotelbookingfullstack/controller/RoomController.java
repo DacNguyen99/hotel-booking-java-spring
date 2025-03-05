@@ -1,7 +1,7 @@
 package com.dacnguyen.hotelbookingfullstack.controller;
 
 import com.dacnguyen.hotelbookingfullstack.dto.response.RoomResponse;
-import com.dacnguyen.hotelbookingfullstack.entity.BookedRoom;
+import com.dacnguyen.hotelbookingfullstack.entity.Booking;
 import com.dacnguyen.hotelbookingfullstack.entity.Room;
 import com.dacnguyen.hotelbookingfullstack.exception.InternalServerException;
 import com.dacnguyen.hotelbookingfullstack.exception.PhotoRetrievalException;
@@ -55,14 +55,12 @@ public class RoomController {
     public ResponseEntity<List<RoomResponse>> getAllRooms() throws SQLException {
         List<Room> rooms = roomService.getAllRooms();
         List<RoomResponse> roomResponses = new ArrayList<>();
+
+        // map room to room response
         for (Room room : rooms) {
-            byte[] photoBytes = roomService.getRoomPhotoById(room.getId());
-            if (photoBytes != null && photoBytes.length > 0) {
-                String photo = Base64.getEncoder().encodeToString(photoBytes);
-                RoomResponse roomResponse = toRoomResponse(room);
-                roomResponse.setPhoto(photo);
-                roomResponses.add(roomResponse);
-            }
+            // using mapper
+            RoomResponse roomResponse = toRoomResponse(room);
+            roomResponses.add(roomResponse);
         }
         return ResponseEntity.ok(roomResponses);
     }
@@ -77,10 +75,7 @@ public class RoomController {
 
         byte[] photoBytes = (roomPhoto != null && !roomPhoto.isEmpty()) ?
                 roomPhoto.getBytes() : roomService.getRoomPhotoById(id);
-        Blob photo = (photoBytes != null && photoBytes.length > 0) ?
-                new SerialBlob(photoBytes) : null;
         Room room = roomService.updateRoom(id, roomType, roomPrice, photoBytes);
-        room.setPhoto(photo);
         RoomResponse roomResponse = toRoomResponse(room);
         return ResponseEntity.ok(roomResponse);
     }
@@ -109,13 +104,8 @@ public class RoomController {
         List<Room> availableRooms = roomService.getAvailableRooms(checkInDate, checkOutDate, roomType);
         List<RoomResponse> roomResponses = new ArrayList<>();
         for (Room room : availableRooms) {
-            byte[] photoBytes = roomService.getRoomPhotoById(room.getId());
-            if (photoBytes != null && photoBytes.length > 0) {
-                String photo = Base64.getEncoder().encodeToString(photoBytes);
-                RoomResponse roomResponse = toRoomResponse(room);
-                roomResponse.setPhoto(photo);
-                roomResponses.add(roomResponse);
-            }
+            RoomResponse roomResponse = toRoomResponse(room);
+            roomResponses.add(roomResponse);
         }
 
         if (roomResponses.isEmpty()) {
@@ -125,22 +115,8 @@ public class RoomController {
         }
     }
 
-
-
-
-
-
-
+    // mapper - Room to RoomResponse
     private RoomResponse toRoomResponse(Room room) {
-        List<BookedRoom> bookings = room.getBookedRooms();
-//        List<BookingResponse> bookingResponses = bookings
-//                .stream()
-//                .map(booking -> new BookingResponse(
-//                        booking.getBookingId(),
-//                        booking.getCheckInDate(),
-//                        booking.getCheckOutDate(),
-//                        booking.getBookingConfirmationCode()
-//                )).toList();
         byte[] photoBytes = null;
         Blob photoBlob = room.getPhoto();
         if (photoBlob != null) {
@@ -156,7 +132,6 @@ public class RoomController {
                 room.getPrice(),
                 room.isAvailable(),
                 photoBytes
-//                bookingResponses
         );
     }
 }

@@ -1,17 +1,17 @@
 package com.dacnguyen.hotelbookingfullstack.service;
 
-import com.dacnguyen.hotelbookingfullstack.entity.BookedRoom;
+import com.dacnguyen.hotelbookingfullstack.entity.Booking;
 
 import java.util.List;
 
 public interface BookingServiceInterface {
     void cancelBooking(long id);
 
-    String saveBooking(long id, BookedRoom bookingRequest);
+    String saveBooking(long id, Booking bookingRequest);
 
-    List<BookedRoom> getAllBookings();
+    List<Booking> getAllBookings();
 
-    BookedRoom findByConfirmationCode(String confirmationCode);
+    Booking findByConfirmationCode(String confirmationCode);
 
-    List<BookedRoom> getBookingsByUserEmail(String email);
+    List<Booking> getBookingsByUserEmail(String email);
 }

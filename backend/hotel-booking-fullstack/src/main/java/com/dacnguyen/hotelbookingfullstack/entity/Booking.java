@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookedRoom {
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,21 +44,11 @@ public class BookedRoom {
     private String bookingConfirmationCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id") // foreign key here
     private Room room;
 
     // create a method to recalculate total guest when customers change the num of adults of children
     public void calculateTotalNumOfGuests() {
         this.totalNumOfGuests = this.numOfAdults + this.numOfChildren;
-    }
-
-    public void setNumOfAdults(int numOfAdults) {
-        this.numOfAdults = numOfAdults;
-        calculateTotalNumOfGuests();
-    }
-
-    public void setNumOfChildren(int numOfChildren) {
-        this.numOfChildren = numOfChildren;
-        calculateTotalNumOfGuests();
     }
 }

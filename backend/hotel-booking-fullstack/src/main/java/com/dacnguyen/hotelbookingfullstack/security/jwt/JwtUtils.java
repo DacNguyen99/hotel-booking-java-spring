@@ -61,19 +61,6 @@ public class JwtUtils {
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     private SecretKey key() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }

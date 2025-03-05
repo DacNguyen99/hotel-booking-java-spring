@@ -26,6 +26,8 @@ public class WebSecurityConfig {
     private final HotelUserDetailsService userDetailsService;
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
 
+    private final static String[] PUBLIC_ENDPOINTS = {"/auth/**", "/rooms/**", "/bookings/**"};
+
     @Bean
     public AuthTokenFilter authTokenFilter() {
         return new AuthTokenFilter();
@@ -60,7 +62,7 @@ public class WebSecurityConfig {
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/auth/**", "/rooms/**", "/bookings/**").permitAll()
+                                .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                                 .requestMatchers("/roles/**").hasRole("ADMIN")
                                 .anyRequest().authenticated());
 
