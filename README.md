@@ -41,4 +41,5 @@ Hệ thống cung cấp các chức năng sau:
 Khi đăng ký tài khoản mới chỉ có thể mang ROLE_USER. Để sử dụng hết tính năng của hệ thống có thể sử dụng tài khoản có ROLE_ADMIN dưới đây:
 
 **Username:** dacnguyen@gmail.com
+
 **Password:** 123456
