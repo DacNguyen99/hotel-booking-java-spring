@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://13.211.169.174:8080",
 });
 
 export const getHeader = () => {
@@ -12,6 +12,13 @@ export const getHeader = () => {
   };
 };
 
+export const getHeaderMultipart = () => {
+  const token = localStorage.getItem("token");
+  return {
+    Authorization: `Bearer ${token}`,
+  };
+};
+
 export async function addRoom(photo, type, price) {
   const formData = new FormData();
   formData.append("photo", photo);
@@ -19,7 +26,7 @@ export async function addRoom(photo, type, price) {
   formData.append("price", price);
 
   const response = await api.post("/rooms/add", formData, {
-    headers: getHeader(),
+    headers: getHeaderMultipart(),
   });
   if (response.status === 201) {
     return true;
@@ -65,7 +72,7 @@ export async function updateRoom(roomId, roomData) {
   formData.append("roomPrice", roomData.price);
   formData.append("roomPhoto", roomData.photo);
   const response = await api.put(`/rooms/update/${roomId}`, formData, {
-    headers: getHeader(),
+    headers: getHeaderMultipart(),
   });
   return response;
 }

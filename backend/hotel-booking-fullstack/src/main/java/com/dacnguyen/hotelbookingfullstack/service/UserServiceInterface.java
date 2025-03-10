@@ -5,7 +5,7 @@ import com.dacnguyen.hotelbookingfullstack.entity.User;
 import java.util.List;
 
 public interface UserServiceInterface {
-    User registerUser(User user);
+    void registerUser(User user);
 
     List<User> getUsers();
 

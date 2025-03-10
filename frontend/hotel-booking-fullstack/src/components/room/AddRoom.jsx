@@ -69,7 +69,7 @@ const AddRoom = () => {
             <div className="alert alert-danger fade show">{errorMessage}</div>
           )}
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="mb-3">
               <label className="form-label" htmlFor="type">
                 Room Type

@@ -24,14 +24,14 @@ public class UserService implements UserServiceInterface {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User registerUser(User user) {
+    public void registerUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new UserAlreadyExistsException(user.getEmail() + " already exists ！");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role role = roleRepository.findByName("ROLE_USER").get();
         user.setRoles(Collections.singletonList(role));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
